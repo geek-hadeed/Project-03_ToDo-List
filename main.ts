@@ -16,7 +16,7 @@ async function createtodo(todos: string[]) {
     choices: ["Add", "Update", "View", "Delete", "Exit"],
   });
 
-  if (ans.operation === "Add") 
+  if (ans.operation === "Add")                // add
   {
     let add = await inquirer.prompt({
       message: "Add Todos",
@@ -26,27 +26,28 @@ async function createtodo(todos: string[]) {
     todos.push(add.addtodo);
     todos.forEach((todo) => console.log(todo));
   }
-  else if (ans.operation === "Update") 
+  else if (ans.operation === "Update")         // update
   {
     let update = await inquirer.prompt({
       message: "Update Todos",
       name: "updatetodo",
       type: "list",
-      choices: todos.map((item) => item),
+      choices: todos.map(item => item),
     });
 
     let add = await inquirer.prompt({
-      message: "Add Todos",
+      message: "Change Todos",
       name: "addtodo",
       type: "input",
     });
 
-    let newtodo = todos.filter(val => val !== update.addtodo);
-    todos = [... newtodo,add.addtodo]
-    todos.forEach((todo) => console.log(todo));
+    let newtodo = todos.filter(val => val !== update.updatetodo);
+    todos = [...newtodo,add.addtodo]
+    // todos.forEach((todo) => console.log(todo));
+    console.log(todos);
   } 
 
-  else if (ans.operation === "View") 
+  else if (ans.operation === "View")           //view
   {
     console.log(chalk.bgGray.yellowBright("`````````Viewing Todos````````````````"));
 
@@ -60,7 +61,7 @@ async function createtodo(todos: string[]) {
     }
   }
 
-  else if (ans.operation === "Delete")
+  else if (ans.operation === "Delete")                 //delete
   {
     let deleted = await inquirer.prompt({
       message: "Update Todos",
@@ -74,7 +75,7 @@ async function createtodo(todos: string[]) {
   todos.forEach((todo) => console.log(todo));
   }
 
-  else if (ans.operation === "Exit") 
+  else if (ans.operation === "Exit")                          //exit
   {
     console.log("Exiting...");
     process.exit(0);
